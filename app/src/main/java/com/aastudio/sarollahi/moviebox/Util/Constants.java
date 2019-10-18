@@ -4,17 +4,17 @@ package com.aastudio.sarollahi.moviebox.Util;
 public class Constants {
 
     //API
-    private static final String KEY = "d6658a851664f8c3586905e0d74fa858";
-    public static final String app_id = "ca-app-pub-5705312979060396~4475984521";
-    public static final String app_unit_id = "ca-app-pub-5705312979060396/5917537635";
-    public static final String app_unit_id_details = "ca-app-pub-5705312979060396/5519722437";
-    public static final String app_unit_id_reviews = "ca-app-pub-5705312979060396/6581522660";
-    //public static final String app_unit_id = "ca-app-pub-3940256099942544/6300978111";
+    private static final String KEY = "";
+    public static final String app_id = "";
+    public static final String app_unit_id = "";
+    public static final String app_unit_id_details = "";
+    public static final String app_unit_id_reviews = "";
+    //public static final String app_unit_id = "";
 
     //OMDB API
     public static final String URL_LEFT = "http://www.omdbapi.com/?s=";
     public static final String URL = "http://www.omdbapi.com/?i=";
-    public static final String API_KEY = "&apikey=cf599b18";
+    public static final String API_KEY = "&apikey=";
     public static final String URL_PAGE = "&page=";
 
     //search movie/tv by name and year (popup)
