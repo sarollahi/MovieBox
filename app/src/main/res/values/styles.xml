@@ -1,0 +1,76 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="dividerDrawable">@drawable/separator_dark</item>
+        <item name="dividerHeight">@dimen/dividerLineHeight</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CircularProgress" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/background</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.Transparent" parent="AppTheme">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+    </style>
+
+    <style name="TextInfoAppName" parent="@style/BaseTextMovieDetails">
+        <item name="android:textSize">26.0sp</item>
+        <item name="android:paddingTop">2.0dip</item>
+        <item name="android:paddingBottom">0.0dip</item>
+    </style>
+
+    <style name="TextInfoDefault" parent="@style/BaseTextMovieDetails">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:paddingTop">0.0dip</item>
+        <item name="android:paddingBottom">2.0dip</item>
+    </style>
+
+    <style name="TextMovieDetailsDark" parent="@style/BaseTextMovieDetails">
+        <item name="android:background">@color/text_view_background</item>
+    </style>
+
+    <style name="TextMovieDetailsHeaderDark" parent="@style/BaseTextMovieDetailsHeader">
+        <item name="android:background">@color/text_view_header</item>
+    </style>
+
+    <style name="BaseTextMovieDetails">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/paddingHorizontalDetailsText</item>
+        <item name="android:paddingTop">6.0dip</item>
+        <item name="android:paddingRight">@dimen/paddingHorizontalDetailsText</item>
+        <item name="android:paddingBottom">6.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">false</item>
+    </style>
+
+    <style name="BaseTextMovieDetailsHeader">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:paddingLeft">10.0dip</item>
+        <item name="android:paddingTop">0.0dip</item>
+        <item name="android:paddingRight">10.0dip</item>
+        <item name="android:paddingBottom">0.0dip</item>
+        <item name="android:layout_marginTop">@dimen/textDetailMarginTop</item>
+    </style>
+
+</resources>

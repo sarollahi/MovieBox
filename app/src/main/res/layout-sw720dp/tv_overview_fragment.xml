@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ProgressBar
+        android:id="@+id/progressBartv"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/overlayout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/plotDet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp" />
+
+        <View
+            android:id="@+id/v1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/plotDet"
+            android:background="@color/colorPrimaryDark" />
+
+
+        <TextView
+            android:id="@+id/ratingtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/v1"
+            android:padding="5dp"
+            android:text="Rating" />
+
+        <ImageView
+            android:id="@+id/imdb"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/ratingtitle"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/imdblogo"
+            android:paddingStart="5dp" />
+
+        <TextView
+            android:id="@+id/imdbRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imdb"
+            android:layout_alignStart="@id/imdb"
+            android:layout_alignEnd="@id/imdb"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:text="--"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/tomatoslogo"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/ratingtitle"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/imdb"
+            android:background="@drawable/tomatoeslogo"
+            android:paddingStart="5dp" />
+
+        <TextView
+            android:id="@+id/tomatosRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tomatoslogo"
+            android:layout_alignStart="@id/imdb"
+            android:layout_alignEnd="@id/metacriticlogo"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:paddingBottom="5dp"
+            android:text="--"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/metacriticlogo"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/ratingtitle"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/tomatoslogo"
+            android:background="@drawable/metacriticlogo" />
+
+        <TextView
+            android:id="@+id/metacriticRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/metacriticlogo"
+            android:layout_alignStart="@id/metacriticlogo"
+            android:layout_alignEnd="@id/metacriticlogo"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:text="--"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/scorelogo"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/ratingtitle"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/metacriticlogo"
+            android:background="@drawable/score" />
+
+        <TextView
+            android:id="@+id/scoreRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/scorelogo"
+            android:layout_alignStart="@id/scorelogo"
+            android:layout_alignEnd="@id/scorelogo"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:text="--"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/optionstitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/v1"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@id/metacriticRating"
+            android:padding="5dp"
+            android:text="@string/externalLinks" />
+
+
+        <ImageButton
+            android:id="@+id/instagram"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/optionstitle"
+            android:layout_marginEnd="15dp"
+            android:layout_alignTop="@id/metacriticlogo"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/instagram"
+            android:paddingStart="5dp" />
+
+
+        <ImageButton
+            android:id="@+id/facebook"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/optionstitle"
+            android:layout_marginEnd="5dp"
+            android:layout_alignTop="@id/metacriticlogo"
+            android:layout_toStartOf="@id/instagram"
+            android:background="@drawable/facebook"
+            android:paddingStart="5dp" />
+
+        <ImageButton
+            android:id="@+id/imdb_id"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/optionstitle"
+            android:layout_marginEnd="5dp"
+            android:layout_alignTop="@id/metacriticlogo"
+            android:layout_toStartOf="@id/facebook"
+            android:background="@drawable/imdblogo"
+            android:paddingStart="5dp" />
+
+        <ImageButton
+            android:id="@+id/homepage"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/optionstitle"
+            android:layout_marginEnd="5dp"
+            android:layout_alignTop="@id/metacriticlogo"
+            android:layout_toStartOf="@id/imdb_id"
+            android:background="@drawable/internet"
+            android:paddingStart="5dp" />
+
+
+
+        <!--<ImageButton-->
+        <!--android:id="@+id/trailers"-->
+        <!--android:layout_width="57dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_below="@+id/awardstitle"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_margin="15dp"-->
+        <!--android:background="@drawable/youtube" />-->
+
+
+        <View
+            android:id="@+id/v12"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/metacriticRating"
+            android:background="@color/colorPrimaryDark" />
+
+        <TextView
+            android:id="@+id/casttitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/v12"
+            android:padding="5dp"
+            android:text="Cast" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/actorcard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/casttitle">
+
+            <HorizontalScrollView
+                android:id="@+id/castimages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/casttitle"
+                android:layout_marginBottom="5dp"
+                android:scrollbars="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/id_gallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"/>
+            </HorizontalScrollView>
+
+        </android.support.v7.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/directortitle"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/actorcard"
+            android:padding="5dp"
+            android:text="Director" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/directorcard"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/directortitle">
+
+            <HorizontalScrollView
+                android:id="@+id/directorimages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/directortitle"
+                android:layout_marginBottom="5dp"
+                android:scrollbars="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/director_gallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"/>
+
+            </HorizontalScrollView>
+
+        </android.support.v7.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/writertitle"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/directorcard"
+            android:padding="5dp"
+            android:text="Writer" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/writercard"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/writertitle">
+
+            <HorizontalScrollView
+                android:id="@+id/writerimages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/writertitle"
+                android:layout_marginBottom="5dp"
+                android:scrollbars="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/writer_gallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"/>
+
+            </HorizontalScrollView>
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/lan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/writercard"
+            android:padding="5dp"
+            android:text="Language" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/lancard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lan">
+
+            <TextView
+                android:id="@+id/lanDet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lan"
+                android:padding="5dp" />
+
+
+        </android.support.v7.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lancard"
+            android:padding="5dp"
+            android:text="Country" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/countrycard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/country">
+
+            <TextView
+                android:id="@+id/countryDet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/country"
+                android:padding="5dp" />
+
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/awardst"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/countrycard"
+            android:padding="5dp"
+            android:text="Awards" />
+
+        <android.support.v7.widget.CardView
+            android:visibility="gone"
+            android:id="@+id/awardscard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/awardst">
+
+            <TextView
+                android:id="@+id/awardsDet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/awardst"
+                android:padding="5dp" />
+
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/production_companies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/awardscard"
+            android:padding="5dp"
+            android:text="@string/production_companies" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/production_companiescard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/production_companies">
+
+            <TextView
+                android:id="@+id/production_companiesDet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/production_companies"
+                android:padding="5dp" />
+
+
+        </android.support.v7.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/budget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/production_companiescard"
+            android:padding="5dp"
+            android:text="@string/seasons" />
+
+
+        <TextView
+            android:id="@+id/boxOffice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/production_companiescard"
+            android:layout_alignParentRight="true"
+            android:padding="5dp"
+            android:text="@string/episodes" />
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/boxcard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/boxOffice">
+
+            <TextView
+                android:id="@+id/boxOfficeDets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/boxOffice"
+                android:layout_marginRight="17dp"
+                android:layout_gravity="right"
+                android:padding="5dp" />
+
+            <TextView
+                android:id="@+id/budgetDets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/boxOffice"
+                android:padding="5dp" />
+
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/seasonscard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/boxcard">
+
+            <HorizontalScrollView
+                android:id="@+id/seasonsimages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/boxcard"
+                android:layout_marginBottom="5dp"
+                android:scrollbars="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/seasons_gallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"/>
+            </HorizontalScrollView>
+
+        </android.support.v7.widget.CardView>
+
+
+
+
+        <TextView
+            android:id="@+id/similartitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seasonscard"
+            android:padding="5dp"
+            android:text="Related Tv Shows" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/similarcard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/similartitle">
+
+            <HorizontalScrollView
+                android:id="@+id/similarimages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/similartitle"
+                android:layout_marginBottom="5dp"
+                android:scrollbars="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/similar_gallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"/>
+            </HorizontalScrollView>
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/recommendtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/similarcard"
+            android:padding="5dp"
+            android:text="Recommended Tv Shows" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/recommendcard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recommendtitle"
+            android:layout_marginBottom="20dp">
+
+            <HorizontalScrollView
+                android:id="@+id/recommendimages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recommendtitle"
+                android:layout_marginBottom="5dp"
+                android:scrollbars="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/recommend_gallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"/>
+            </HorizontalScrollView>
+
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>

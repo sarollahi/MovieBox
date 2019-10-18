@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+
+    <item android:title="@string/search_by_person">
+        <menu>
+            <item
+                android:title="@string/name"
+                android:icon="@drawable/baseline_person_24"/>
+            <item
+                android:id="@+id/navigation_drawer_item5"
+                android:title="@null"
+                app:actionLayout="@layout/edittext"/>
+            <item
+                android:id="@+id/navigation_drawer_item6"
+                android:title="@null"
+                app:actionLayout="@layout/btn"/>
+        </menu>
+
+    </item>
+
+    <item android:title="@string/search_by_genre">
+        <menu>
+            <item
+                android:title="@string/movies_search_title"
+                android:icon="@drawable/baseline_local_movies_24"/>
+            <item
+                android:id="@+id/navigation_drawer_item3"
+                android:title="@null"
+                app:actionLayout="@layout/spinner"/>
+
+            <item
+                android:title="@string/tv_shows1"
+                android:icon="@drawable/baseline_tv_24"/>
+            <item
+                android:id="@+id/navigation_drawer_item4"
+                android:title="@null"
+                app:actionLayout="@layout/spinner"/>
+        </menu>
+    </item>
+
+</menu>

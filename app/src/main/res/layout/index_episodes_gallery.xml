@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/id_index_episodes_image"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="2dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/id_index_episodes_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/id_index_episodes_image"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:background="#33FF0000"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:textColor="#fff"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/id_index_episodes_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/id_index_episodes_num"
+        android:layout_alignBottom="@id/id_index_episodes_image"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:textColor="#fff"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/id_index_episodes_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/id_index_episodes_name"
+        android:layout_alignBottom="@id/id_index_episodes_image"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:textColor="#fff"
+        android:textSize="12dp" />
+
+    <com.uncopt.android.widget.text.justify.JustifiedTextView
+        android:id="@+id/id_index_episodes_plot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/id_index_episodes_image"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp" />
+
+
+
+</RelativeLayout>

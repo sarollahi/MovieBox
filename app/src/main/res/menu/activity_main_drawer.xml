@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="@string/my_collection">
+        <menu>
+            <item
+                android:id="@+id/nav_movies"
+                android:icon="@drawable/baseline_local_movies_24"
+                android:title="@string/movies" />
+            <item
+                android:id="@+id/nav_tv_shows"
+                android:icon="@drawable/baseline_tv_24"
+                android:title="@string/tv_shows" />
+            <item
+                android:id="@+id/nav_wish"
+                android:icon="@drawable/baseline_favorite_border_24"
+                android:title="@string/favorites" />
+        </menu>
+    </item>
+
+    <item android:title="@string/utilities">
+        <menu>
+            <item
+                android:id="@+id/nav_br"
+                android:icon="@drawable/baseline_backup_24"
+                android:title="@string/backup_restor" />
+            <item
+                android:id="@+id/nav_contact"
+                android:icon="@drawable/baseline_email_24"
+                android:title="@string/contact_developer_title" />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/baseline_info_24"
+                android:title="@string/about" />
+        </menu>
+    </item>
+
+</menu>

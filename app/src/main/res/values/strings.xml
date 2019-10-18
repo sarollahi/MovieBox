@@ -1,0 +1,110 @@
+<resources>
+    <string name="app_name">Movie Box</string>
+    <string name="action_settings">Settings</string>
+    <string name="search">Search</string>
+    <string name="search_text">New Search Term</string>
+    <string name="search_hint">E.g: Batman</string>
+    <string name="submit_text">Search</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Movie Box</string>
+    <string name="nav_header_subtitle" translatable="false">moviebox@sarollahi.ir</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="backup_restor"><![CDATA[Backup & restore]]></string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="tab_text_1">LIST</string>
+    <string name="tab_text_2">TILES</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_movie_detail">MovieDetailActivity</string>
+    <string name="title_activity_person">PersonActivity</string>
+    <string name="hint_tmdb_sentence" translatable="false">This product uses the TMDb API but is not endorsed or certified by TMDb</string>
+    <string name="rate" translatable="false">"Rate positive"</string>
+    <string name="dialog_app_version_prefix" translatable="false">Version: 1.1.6</string>
+    <string name="dialog_developer_information" translatable="false"><span>\nDeveloped and designed by</span>\n\n<span><small>Seyed Ahmad Sarollahi\nmoviebox@sarollahi.ir</small></span></string>
+    <string name="title_activity_my_movies">MyMoviesActivity</string>
+
+    <string name="add_item">Add First Movie</string>
+    <string name="enter_movie">Search movie</string>
+    <string name="hint_movie">title</string>
+    <string name="year_hint">year (optional)</string>
+    <string name="search_title">SEARCH</string>
+    <string name="scan_title">SCAN CODE</string>
+    <string name="new_title">NEW</string>
+    <string name="title_activity_best">BestActivity</string>
+    <string name="rating">Rating</string>
+    <string name="ratingText">--</string>
+    <string name="externalLinks">External Links</string>
+    <string name="cast">Cast</string>
+    <string name="director">Director</string>
+    <string name="writer">Writer</string>
+    <string name="language">Language</string>
+    <string name="country">Country</string>
+    <string name="awards">Awards</string>
+    <string name="budget">Budget</string>
+    <string name="box_office">Box Office</string>
+    <string name="related_movies">Related Movies</string>
+    <string name="recommended_movies">Recommended Movies</string>
+    <string name="production_companies">Production Companies</string>
+    <string name="episodes">Episodes</string>
+    <string name="seasons">Seasons</string>
+    <string name="Nothing_found">Nothing found</string>
+    <string name="No_movies_found">No movies found</string>
+    <string name="No_tv_shows_found">No TV shows found</string>
+    <string name="serach_movies_tv_shows"> movies/TV shows </string>
+    <string name="device_information">DEVICE INFORMATION</string>
+    <string name="please_write_your_message_in_english" translatable="false">\nPlease write your message in English</string>
+    <string name="message">MESSAGE</string>
+    <string name="title_activity_contac">ContacActivity</string>
+    <string name="send">SEND</string>
+    <string name="contact_developer">Contact Developer</string>
+    <string name="cause">CAUSE</string>
+    <string name="no_reviews">No reviews found</string>
+    <string name="No_trailers_found">No trailers found</string>
+    <string name="separator">|</string>
+    <string name="favorites">Favorites</string>
+    <string name="tv_shows">TV Shows</string>
+    <string name="my_collection">MY COLLECTION</string>
+    <string name="utilities">UTILITIES</string>
+    <string name="contact_developer_title">Contact developer</string>
+    <string name="about">About</string>
+    <string name="added_to_seen_movies">Added to seen movies</string>
+    <string name="added_to_favorites">Added to favorites</string>
+    <string name="deleted_from_favorites">Deleted from favorites</string>
+    <string name="deleted_from_seen_movies">Deleted from seen movies</string>
+    <string name="added_to_seen_tvshows">Added to seen TV shows</string>
+    <string name="deleted_from_seen_tvshws">Deleted from seen TV shows</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="backups">BACKUPS</string>
+    <string name="backup">BACKUP</string>
+    <string name="deletedb">DELETE DATABASE</string>
+    <string name="backup_and_restore">BACKUP AND RESTORE</string>
+    <string name="my_tv_shows_collection">My TV shows collection</string>
+    <string name="my_favorite_collection">My favorites collection</string>
+    <string name="my_movies_collection">My movies collection</string>
+    <string name="db_not_found">Database not found</string>
+    <string name="db_delete">Database deleted successfully</string>
+    <string name="db_not_import">Unable to import database. Retry</string>
+    <string name="db_not_backup">Unable to backup database. Retry</string>
+    <string name="import_completed">Import Completed</string>
+    <string name="backup_completed">Backup Completed</string>
+    <string name="search_by_person">Search by person</string>
+    <string name="search_by_genre">Search by genre</string>
+    <string name="movies">Movies</string>
+    <string name="tv_shows1">Tv Shows</string>
+    <string name="name">name:</string>
+    <string name="movies_search_title">Movies</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="filter">Filter</string>
+
+    <string-array name="cause">
+        <item>Error report</item>
+        <item>Feature request</item>
+        <item>Other</item>
+    </string-array>
+</resources>
