@@ -1,16 +1,16 @@
 package com.aastudio.sarollahi.moviebox.Fragments;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.aastudio.sarollahi.moviebox.Data.MovieRecyclerViewAdapter;
 import com.aastudio.sarollahi.moviebox.Model.Movie;
@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,21 +33,43 @@ import java.util.List;
 
 public class FragmentUp extends Fragment {
 
+    private static final int PAGE_START = 1;
     View v;
-
+    LinearLayoutManager manager;
+    int currentItems, totalItems, scrollOutItems;
+    Boolean isScrolling = false;
     private RecyclerView recyclerView;
     private MovieRecyclerViewAdapter movieRecyclerViewAdapter;
     private List<Movie> movieList;
     private RequestQueue queue;
-    LinearLayoutManager manager;
-
-    private static final int PAGE_START = 1;
     private int TOTAL_PAGES = 1;
     private int currentPage = PAGE_START;
-    int currentItems, totalItems, scrollOutItems;
-    Boolean isScrolling = false;
+    private final RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                isScrolling = true;
+            }
+        }
 
+        @Override
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
 
+            currentItems = manager.getChildCount();
+            totalItems = manager.getItemCount();
+            scrollOutItems = manager.findFirstVisibleItemPosition();
+
+            if (isScrolling && (currentItems + scrollOutItems == totalItems) && currentPage < TOTAL_PAGES) {
+
+                isScrolling = false;
+                currentPage++;
+                movieList = getMovies(currentPage);
+
+            }
+        }
+    };
 
     public FragmentUp() {
     }
@@ -54,9 +77,9 @@ public class FragmentUp extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.up_fragment,container,false);
+        v = inflater.inflate(R.layout.up_fragment, container, false);
 
-        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerViewUp);
+        recyclerView = v.findViewById(R.id.recyclerViewUp);
         recyclerView.setHasFixedSize(true);
         movieRecyclerViewAdapter = new MovieRecyclerViewAdapter(getContext(), movieList);
         manager = new LinearLayoutManager(getContext());
@@ -80,44 +103,15 @@ public class FragmentUp extends Fragment {
         movieList = getMovies(currentPage);
     }
 
-    private final RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
-        @Override
-        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-            super.onScrollStateChanged(recyclerView, newState);
-            if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
-            {
-                isScrolling = true;
-            }
-        }
-
-        @Override
-        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-            super.onScrolled(recyclerView, dx, dy);
-
-            currentItems = manager.getChildCount();
-            totalItems = manager.getItemCount();
-            scrollOutItems = manager.findFirstVisibleItemPosition();
-
-            if(isScrolling && (currentItems + scrollOutItems == totalItems) && currentPage<TOTAL_PAGES)
-            {
-
-                isScrolling = false;
-                currentPage++;
-                movieList = getMovies(currentPage);
-
-            }
-        }
-    };
-
     private List<Movie> getMovies(int page) {
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                Constants.UP_COMING_URL+page,null, new Response.Listener<JSONObject>() {
+                Constants.UP_COMING_URL + page, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
-                try{
+                try {
                     TOTAL_PAGES = Integer.parseInt(response.getString("total_pages"));
                     JSONArray moviesArray = response.getJSONArray("results");
 
@@ -131,7 +125,7 @@ public class FragmentUp extends Fragment {
 
                         movie.setOriginalLanguage(movieObj.getString("original_language"));
                         movie.setPlot(movieObj.getString("overview"));
-                        movie.setPoster("http://image.tmdb.org/t/p/w185"+movieObj.getString("poster_path"));
+                        movie.setPoster("http://image.tmdb.org/t/p/w185" + movieObj.getString("poster_path"));
                         movie.setMovieId(movieObj.getString("id"));
 
                         movieList.add(movie);
@@ -141,9 +135,9 @@ public class FragmentUp extends Fragment {
 
                     movieRecyclerViewAdapter.notifyDataSetChanged();//Important!!
 
-                }catch (JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
-                    Snackbar.make(getView(), R.string.No_movies_found,Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(getView(), R.string.No_movies_found, Snackbar.LENGTH_LONG).show();
                 }
 
 
@@ -160,4 +154,4 @@ public class FragmentUp extends Fragment {
         return movieList;
     }
 
-   }
+}

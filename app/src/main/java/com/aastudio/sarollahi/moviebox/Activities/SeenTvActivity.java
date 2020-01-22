@@ -1,9 +1,10 @@
 package com.aastudio.sarollahi.moviebox.Activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.aastudio.sarollahi.moviebox.Data.DbHelper;
 import com.aastudio.sarollahi.moviebox.Data.SeenTvRecyclerViewAdapter;
@@ -19,7 +20,7 @@ public class SeenTvActivity extends AppCompatActivity {
     private SeenTvRecyclerViewAdapter seenTvRecyclerViewAdapter;
     private List<TvShow> tvShowList;
     private List<TvShow> listItems;
-    private DbHelper db;;
+    private DbHelper db;
     private AppCompatActivity activity = SeenTvActivity.this;
 
     @Override
@@ -36,7 +37,7 @@ public class SeenTvActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         finish();
         return true;
     }
@@ -52,7 +53,7 @@ public class SeenTvActivity extends AppCompatActivity {
     private void getTvs() {
 
         db = new DbHelper(this);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewID);
+        recyclerView = findViewById(R.id.recyclerViewID);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

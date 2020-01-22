@@ -3,9 +3,6 @@
     <color name="colorPrimary">#527da3</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="background">#EFEFEF</color>
-    <color name="text_view_header">#90203b3b</color>
-    <color name="text_view_background">#85000000</color>
     <color name="separator_grey">#ff424242</color>
     <color name="separator_black">#ff000000</color>
 </resources>

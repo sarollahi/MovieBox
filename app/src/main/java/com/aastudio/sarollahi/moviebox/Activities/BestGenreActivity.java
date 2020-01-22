@@ -1,14 +1,19 @@
 package com.aastudio.sarollahi.moviebox.Activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.aastudio.sarollahi.moviebox.Data.MovieRecyclerViewAdapter;
 import com.aastudio.sarollahi.moviebox.Data.TvRecyclerViewAdapter;
@@ -22,6 +27,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdIconView;
+import com.facebook.ads.AdOptionsView;
+import com.facebook.ads.NativeAdLayout;
+import com.facebook.ads.NativeAdListener;
+import com.facebook.ads.NativeBannerAd;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,6 +56,7 @@ public class BestGenreActivity extends AppCompatActivity {
     private List<String> list1;
     private List<String> list2;
     private Button filter;
+    private NativeBannerAd nativeBannerAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,21 +82,21 @@ public class BestGenreActivity extends AppCompatActivity {
         getYear();
         getlist2();
 
-        spinner1.setSelection(list1.size()-1);
-        spinner2.setSelection(list2.size()-1);
+        spinner1.setSelection(list1.size() - 1);
+        spinner2.setSelection(list2.size() - 1);
 
 
         movieList = new ArrayList<>();
         tvList = new ArrayList<>();
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewbest);
+        recyclerView = findViewById(R.id.recyclerViewbest);
         recyclerView.setHasFixedSize(true);
 
         final String secyear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 
-        if (type.equals("movie")){
+        if (type.equals("movie")) {
             getSupportActionBar().setTitle("Best of " + genre_key + " movies");
-            movieList = getBestm(genre,secyear,secyear);
+            movieList = getBestm(genre, secyear, secyear);
             movieRecyclerViewAdapter = new MovieRecyclerViewAdapter(this, movieList);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(movieRecyclerViewAdapter);
@@ -93,7 +106,7 @@ public class BestGenreActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     getlist2();
-                    spinner2.setSelection(list2.size()-1);
+                    spinner2.setSelection(list2.size() - 1);
                 }
 
                 @Override
@@ -113,10 +126,10 @@ public class BestGenreActivity extends AppCompatActivity {
                 }
             });
 
-        }else if (type.equals("tv")){
+        } else if (type.equals("tv")) {
             getSupportActionBar().setTitle("Best of " + genre_key + " tv shows");
-            tvList = getBestt(genre,secyear,secyear);
-            tvRecyclerViewAdapter = new TvRecyclerViewAdapter(this, tvList );
+            tvList = getBestt(genre, secyear, secyear);
+            tvRecyclerViewAdapter = new TvRecyclerViewAdapter(this, tvList);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(tvRecyclerViewAdapter);
             tvRecyclerViewAdapter.notifyDataSetChanged();
@@ -125,7 +138,7 @@ public class BestGenreActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     getlist2();
-                    spinner2.setSelection(list2.size()-1);
+                    spinner2.setSelection(list2.size() - 1);
                 }
 
                 @Override
@@ -137,7 +150,7 @@ public class BestGenreActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     tvList = getBestt(genre, String.valueOf(spinner1.getSelectedItem()), String.valueOf(spinner2.getSelectedItem()));
-                    tvRecyclerViewAdapter = new TvRecyclerViewAdapter(getApplicationContext(), tvList );
+                    tvRecyclerViewAdapter = new TvRecyclerViewAdapter(getApplicationContext(), tvList);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     recyclerView.setAdapter(tvRecyclerViewAdapter);
                     tvRecyclerViewAdapter.notifyDataSetChanged();
@@ -145,9 +158,128 @@ public class BestGenreActivity extends AppCompatActivity {
             });
         }
 
+        nativeBannerAd = new NativeBannerAd(this, Constants.Best_Genre_ZONE_ID);
+        nativeBannerAd.setAdListener(new NativeAdListener() {
 
+            @Override
+            public void onMediaDownloaded(Ad ad) {
 
+            }
 
+            @Override
+            public void onError(Ad ad, AdError adError) {
+
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                // Race condition, load() called again before last ad was displayed
+                if (nativeBannerAd == null || nativeBannerAd != ad) {
+                    return;
+                }
+                // Inflate Native Banner Ad into Container
+                inflateAd(nativeBannerAd);
+                List<View> clickableViews = new ArrayList<>();
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+
+            }
+
+        });
+        // load the ad
+        nativeBannerAd.loadAd();
+
+    }
+
+    private void inflateAd(NativeBannerAd nativeBannerAd) {
+        // Unregister last ad
+        nativeBannerAd.unregisterView();
+
+        // Add the Ad view into the ad container.
+        NativeAdLayout nativeAdLayout = findViewById(R.id.native_banner_ad_container);
+        LayoutInflater inflater = LayoutInflater.from(BestGenreActivity.this);
+        // Inflate the Ad view.  The layout referenced is the one you created in the last step.
+        LinearLayout adView = (LinearLayout) inflater.inflate(R.layout.native_banner_ad_layout, nativeAdLayout, false);
+        nativeAdLayout.addView(adView);
+
+        // Add the AdChoices icon
+        RelativeLayout adChoicesContainer = adView.findViewById(R.id.ad_choices_container);
+        AdOptionsView adOptionsView = new AdOptionsView(BestGenreActivity.this, nativeBannerAd, nativeAdLayout);
+        adChoicesContainer.removeAllViews();
+        adChoicesContainer.addView(adOptionsView, 0);
+
+        // Create native UI using the ad metadata.
+        TextView nativeAdTitle = adView.findViewById(R.id.native_ad_title);
+        TextView nativeAdSocialContext = adView.findViewById(R.id.native_ad_social_context);
+        TextView sponsoredLabel = adView.findViewById(R.id.native_ad_sponsored_label);
+        AdIconView nativeAdIconView = adView.findViewById(R.id.native_icon_view);
+        Button nativeAdCallToAction = adView.findViewById(R.id.native_ad_call_to_action);
+
+        // Set the Text.
+        nativeAdCallToAction.setText(nativeBannerAd.getAdCallToAction());
+        nativeAdCallToAction.setVisibility(
+                nativeBannerAd.hasCallToAction() ? View.VISIBLE : View.INVISIBLE);
+        nativeAdTitle.setText(nativeBannerAd.getAdvertiserName());
+        nativeAdSocialContext.setText(nativeBannerAd.getAdSocialContext());
+        sponsoredLabel.setText(nativeBannerAd.getSponsoredTranslation());
+
+        // Register the Title and CTA button to listen for clicks.
+        List<View> clickableViews = new ArrayList<>();
+        clickableViews.add(nativeAdTitle);
+        clickableViews.add(nativeAdCallToAction);
+        nativeBannerAd.registerViewForInteraction(adView, nativeAdIconView, clickableViews);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            nativeBannerAd = new NativeBannerAd(this, Constants.Best_Genre_ZONE_ID);
+            nativeBannerAd.setAdListener(new NativeAdListener() {
+
+                @Override
+                public void onMediaDownloaded(Ad ad) {
+
+                }
+
+                @Override
+                public void onError(Ad ad, AdError adError) {
+
+                }
+
+                @Override
+                public void onAdLoaded(Ad ad) {
+                    // Race condition, load() called again before last ad was displayed
+                    if (nativeBannerAd == null || nativeBannerAd != ad) {
+                        return;
+                    }
+                    // Inflate Native Banner Ad into Container
+                    inflateAd(nativeBannerAd);
+                    List<View> clickableViews = new ArrayList<>();
+                }
+
+                @Override
+                public void onAdClicked(Ad ad) {
+
+                }
+
+                @Override
+                public void onLoggingImpression(Ad ad) {
+
+                }
+
+            });
+            // load the ad
+            nativeBannerAd.loadAd();
+        } catch (Error error) {
+        }
     }
 
     private void getYear() {
@@ -156,12 +288,12 @@ public class BestGenreActivity extends AppCompatActivity {
 
         list1 = new ArrayList<String>();
 
-        for (int i = 1900; i<Calendar.getInstance().get(Calendar.YEAR)+1;i++){
+        for (int i = 1900; i < Calendar.getInstance().get(Calendar.YEAR) + 1; i++) {
             list1.add(String.valueOf(i));
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
-                android.R.layout.simple_spinner_item,list1);
+                android.R.layout.simple_spinner_item, list1);
 
         spinner1.setAdapter(adapter);
     }
@@ -172,18 +304,18 @@ public class BestGenreActivity extends AppCompatActivity {
 
         list2 = new ArrayList<String>();
 
-        for (int i = Integer.parseInt(String.valueOf(spinner1.getSelectedItem())); i<Calendar.getInstance().get(Calendar.YEAR)+1; i++){
+        for (int i = Integer.parseInt(String.valueOf(spinner1.getSelectedItem())); i < Calendar.getInstance().get(Calendar.YEAR) + 1; i++) {
             list2.add(String.valueOf(i));
         }
 
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(),
-                android.R.layout.simple_spinner_item,list2);
+                android.R.layout.simple_spinner_item, list2);
 
         spinner2.setAdapter(adapter2);
     }
 
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         finish();
         return true;
     }
@@ -193,11 +325,11 @@ public class BestGenreActivity extends AppCompatActivity {
         movieList.clear();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                Constants.BEST_MOVIE_GENRE_URL_LEFT + firstYear + Constants.BEST_MOVIE_GENRE_URL_MIDDLE + secondYear + Constants.BEST_MOVIE_GENRE_URL_RIGHT + id,null, new Response.Listener<JSONObject>() {
+                Constants.BEST_MOVIE_GENRE_URL_LEFT + firstYear + Constants.BEST_MOVIE_GENRE_URL_MIDDLE + secondYear + Constants.BEST_MOVIE_GENRE_URL_RIGHT + id, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
-                try{
+                try {
 
                     JSONArray moviesArray = response.getJSONArray("results");
 
@@ -211,7 +343,7 @@ public class BestGenreActivity extends AppCompatActivity {
 
                         movie.setOriginalLanguage(movieObj.getString("original_language"));
                         movie.setPlot(movieObj.getString("overview"));
-                        movie.setPoster("http://image.tmdb.org/t/p/w185"+movieObj.getString("poster_path"));
+                        movie.setPoster("http://image.tmdb.org/t/p/w185" + movieObj.getString("poster_path"));
                         movie.setMovieId(movieObj.getString("id"));
 
                         movieList.add(movie);
@@ -221,7 +353,7 @@ public class BestGenreActivity extends AppCompatActivity {
 
                     movieRecyclerViewAdapter.notifyDataSetChanged();//Important!!
 
-                }catch (JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
@@ -244,11 +376,11 @@ public class BestGenreActivity extends AppCompatActivity {
         tvList.clear();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                Constants.BEST_TV_GENRE_URL_LEFT + firstYear + Constants.BEST_TV_GENRE_URL_MIDDLE + secondYear + Constants.BEST_TV_GENRE_URL_RIGHT + id,null, new Response.Listener<JSONObject>() {
+                Constants.BEST_TV_GENRE_URL_LEFT + firstYear + Constants.BEST_TV_GENRE_URL_MIDDLE + secondYear + Constants.BEST_TV_GENRE_URL_RIGHT + id, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
-                try{
+                try {
 
                     JSONArray moviesArray = response.getJSONArray("results");
 
@@ -262,7 +394,7 @@ public class BestGenreActivity extends AppCompatActivity {
 
                         movie.setOriginalLanguage(movieObj.getString("original_language"));
                         movie.setPlot(movieObj.getString("overview"));
-                        movie.setPoster("http://image.tmdb.org/t/p/w185"+movieObj.getString("poster_path"));
+                        movie.setPoster("http://image.tmdb.org/t/p/w185" + movieObj.getString("poster_path"));
                         movie.setMovieId(movieObj.getString("id"));
 
                         tvList.add(movie);
@@ -272,7 +404,7 @@ public class BestGenreActivity extends AppCompatActivity {
 
                     tvRecyclerViewAdapter.notifyDataSetChanged();//Important!!
 
-                }catch (JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
 

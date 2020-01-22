@@ -2,8 +2,8 @@ package com.aastudio.sarollahi.moviebox.Model;
 
 import java.io.Serializable;
 
-public class TvShow implements Serializable{
-    private static  final long id = 1L;
+public class TvShow implements Serializable {
+    private static final long id = 1L;
 
     private int ids;
     private String title;

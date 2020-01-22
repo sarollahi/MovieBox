@@ -3,8 +3,7 @@ package com.aastudio.sarollahi.moviebox.Model;
 import java.io.Serializable;
 
 public class Actor implements Serializable {
-    private static  final long id = 1L;
-
+    private static final long id = 1L;
 
 
     private String actorId;

@@ -4,11 +4,8 @@ package com.aastudio.sarollahi.moviebox.Activities;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Handler;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -16,14 +13,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.aastudio.sarollahi.moviebox.Data.DbHelper;
-import com.aastudio.sarollahi.moviebox.Fragments.FragmentReviews;
 import com.aastudio.sarollahi.moviebox.Data.ViewPagerAdapter;
 import com.aastudio.sarollahi.moviebox.Fragments.FragmentOverviewMovie;
+import com.aastudio.sarollahi.moviebox.Fragments.FragmentReviews;
 import com.aastudio.sarollahi.moviebox.Model.Movie;
-import com.android.sarollahi.moviebox.R;
 import com.aastudio.sarollahi.moviebox.Util.Constants;
 import com.aastudio.sarollahi.moviebox.Util.CustomViewPager;
+import com.android.sarollahi.moviebox.R;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -32,7 +31,10 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.ivbaranov.mfb.MaterialFavoriteButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,6 +63,7 @@ public class DetailActivity extends AppCompatActivity {
     private Boolean seenbtn;
     private Boolean favbtn;
     private ImageButton play_button;
+    private LinearLayout page;
 
 
     @Override
@@ -92,17 +95,9 @@ public class DetailActivity extends AppCompatActivity {
         Movie movie = (Movie) getIntent().getSerializableExtra("movie");
         movieId = movie.getMovieId();
 
-        if(db.getmovie(movieId) == 0){
-            seenbtn = false;
-        }else {
-            seenbtn = true;
-        }
+        seenbtn = db.getmovie(movieId) != 0;
 
-        if(db.getfav(movieId) == 0){
-            favbtn = false;
-        }else {
-            favbtn = true;
-        }
+        favbtn = db.getfav(movieId) != 0;
 
 
         setUpUI();
@@ -122,14 +117,14 @@ public class DetailActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Handler handler= new Handler();
+                Handler handler = new Handler();
                 handler.removeCallbacks(detail);
                 finish();
             }
         });
 
 
-        MaterialFavoriteButton favorite = (MaterialFavoriteButton) v.findViewById(R.id.favorite_button);
+        MaterialFavoriteButton favorite = v.findViewById(R.id.favorite_button);
         favorite.setFavorite(favbtn, false);
         favorite.setOnFavoriteChangeListener(
                 new MaterialFavoriteButton.OnFavoriteChangeListener() {
@@ -143,7 +138,7 @@ public class DetailActivity extends AppCompatActivity {
                     }
                 });
 
-        MaterialFavoriteButton seen = (MaterialFavoriteButton) v.findViewById(R.id.seen_button);
+        MaterialFavoriteButton seen = v.findViewById(R.id.seen_button);
         seen.setFavorite(seenbtn, false);
         seen.setOnFavoriteChangeListener(
                 new MaterialFavoriteButton.OnFavoriteChangeListener() {
@@ -157,22 +152,21 @@ public class DetailActivity extends AppCompatActivity {
                     }
                 });
 
-        play_button = (ImageButton) v.findViewById(R.id.play_button);
+        play_button = v.findViewById(R.id.play_button);
         play_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!trailerText.getText().toString().equals("")){
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v="+ trailerText.getText().toString()));
+                if (!trailerText.getText().toString().equals("")) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + trailerText.getText().toString()));
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra("VIDEO_ID", trailerText.getText().toString());
                     startActivity(intent);
-                }else {
+                } else {
                     play_button.setBackground(getApplicationContext().getResources().getDrawable(R.drawable.baseline_tv_off_24));
                 }
 
             }
         });
-
 
 
     }
@@ -237,8 +231,18 @@ public class DetailActivity extends AppCompatActivity {
         Snackbar.make(v, R.string.deleted_from_favorites, Snackbar.LENGTH_LONG).show();
     }
 
-
-
+    private void setUpUI() {
+        rated = findViewById(R.id.movieRateIDDets);
+        title = findViewById(R.id.movieTitleIDDet);
+        trailerText = findViewById(R.id.trailer);
+        year = findViewById(R.id.movieYeayIDDet);
+        released = findViewById(R.id.movieReleaseIDDets);
+        runTime = findViewById(R.id.movieTimeIDDets);
+        genre = findViewById(R.id.movieGenreIDDet);
+        poster = findViewById(R.id.moviePoster);
+        iGallery = findViewById(R.id.movie_images_gallery);
+        page = findViewById(R.id.detailePage);
+    }
 
     class getdetail implements Runnable {
 
@@ -286,7 +290,7 @@ public class DetailActivity extends AppCompatActivity {
                                     movieimage = similar.getString("file_path");
                                     View view = mInflater.inflate(R.layout.index_movie_images_gallery,
                                             iGallery, false);
-                                    ImageView movieimg = (ImageView) view
+                                    ImageView movieimg = view
                                             .findViewById(R.id.id_index_movie_images);
                                     Picasso.get()
                                             .load("https://image.tmdb.org/t/p/w300" + movieimage)
@@ -317,13 +321,12 @@ public class DetailActivity extends AppCompatActivity {
 
                             if (video.length() > 0) {
 
-                                    JSONObject play = video.getJSONObject(0);
-                                    trailerText.setText(play.getString("key"));
+                                JSONObject play = video.getJSONObject(0);
+                                trailerText.setText(play.getString("key"));
 
-                            }else {
+                            } else {
                                 trailerText.setText("");
                             }
-
 
 
                         } catch (JSONException e) {
@@ -383,20 +386,9 @@ public class DetailActivity extends AppCompatActivity {
             });
 
             queue.add(jsonObjectRequest);
+            page.setVisibility(View.VISIBLE);
 
         }
-    }
-
-    private void setUpUI() {
-        rated = findViewById(R.id.movieRateIDDets);
-        title = findViewById(R.id.movieTitleIDDet);
-        trailerText = findViewById(R.id.trailer);
-        year = findViewById(R.id.movieYeayIDDet);
-        released = findViewById(R.id.movieReleaseIDDets);
-        runTime = findViewById(R.id.movieTimeIDDets);
-        genre = findViewById(R.id.movieGenreIDDet);
-        poster = findViewById(R.id.moviePoster);
-        iGallery = (LinearLayout) findViewById(R.id.movie_images_gallery);
     }
 
 }

@@ -1,12 +1,13 @@
 package com.aastudio.sarollahi.moviebox.Activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.aastudio.sarollahi.moviebox.Util.Constants;
 import com.android.sarollahi.moviebox.R;
@@ -50,18 +51,18 @@ public class SeasonActivity extends AppCompatActivity {
         String season = movieName.getString("seasonId");
 
         setUpUI();
-        getSeasonDetails(tv,season);
+        getSeasonDetails(tv, season);
 
 
     }
 
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         finish();
         return true;
     }
 
-    private void getSeasonDetails(final String tvId,final String seasonnumber) {
+    private void getSeasonDetails(final String tvId, final String seasonnumber) {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET
                 , Constants.TV_SHOW_Episode_Left + tvId + Constants.TV_SHOW_Episode_MIDDLE + seasonnumber + Constants.TV_SHOW_Episode_RIGHT, null, new Response.Listener<JSONObject>() {
@@ -76,7 +77,7 @@ public class SeasonActivity extends AppCompatActivity {
                     plot.setText(response.getString("overview"));
                     released.setText(response.getString("air_date"));
                     title.setText(response.getString("name"));
-                    Picasso.get().load("https://image.tmdb.org/t/p/h632"+response.getString("poster_path")).into(poster);
+                    Picasso.get().load("https://image.tmdb.org/t/p/h632" + response.getString("poster_path")).into(poster);
 
 
                     JSONArray episodeArray = response.getJSONArray("episodes");
@@ -99,14 +100,14 @@ public class SeasonActivity extends AppCompatActivity {
                                 num = episode.getString("episode_number");
                                 View view = mInflater.inflate(R.layout.index_episodes_gallery,
                                         mGallery, false);
-                                ImageView img = (ImageView) view
+                                ImageView img = view
                                         .findViewById(R.id.id_index_episodes_image);
                                 Picasso.get()
-                                        .load("https://image.tmdb.org/t/p/h632"+image).placeholder(R.drawable.noimage)
+                                        .load("https://image.tmdb.org/t/p/h632" + image).placeholder(R.drawable.noimage)
                                         .into(img);
-                                TextView anum = (TextView) view
+                                TextView anum = view
                                         .findViewById(R.id.id_index_episodes_num);
-                                anum.setText("Episode "+num +"   -   " + name+"   -   "+ date);
+                                anum.setText("Episode " + num + "   -   " + name + "   -   " + date);
                                 TextView aplot = (JustifiedTextView) view
                                         .findViewById(R.id.id_index_episodes_plot);
                                 aplot.setText(plot);
@@ -137,11 +138,11 @@ public class SeasonActivity extends AppCompatActivity {
 
     private void setUpUI() {
 
-        plot = (JustifiedTextView) findViewById(R.id.plotDet);
-        title = (TextView) findViewById(R.id.seasonname);
-        released = (TextView) findViewById(R.id.seasonReleased);
-        poster = (ImageView) findViewById(R.id.seasonimage);
-        mGallery = (LinearLayout) findViewById(R.id.id_gallery);
+        plot = findViewById(R.id.plotDet);
+        title = findViewById(R.id.seasonname);
+        released = findViewById(R.id.seasonReleased);
+        poster = findViewById(R.id.seasonimage);
+        mGallery = findViewById(R.id.id_gallery);
 
     }
 }

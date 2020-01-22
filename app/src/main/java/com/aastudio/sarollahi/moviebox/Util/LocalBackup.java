@@ -2,9 +2,10 @@ package com.aastudio.sarollahi.moviebox.Util;
 
 import android.content.Intent;
 import android.os.Environment;
-import android.support.v7.app.AlertDialog;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.aastudio.sarollahi.moviebox.Activities.BackupRestoreActivity;
 import com.aastudio.sarollahi.moviebox.Data.DbHelper;
@@ -34,20 +35,21 @@ public class LocalBackup {
         if (!folder.exists())
             success = folder.mkdirs();
         if (success) {
-                Date c = Calendar.getInstance().getTime();
-                System.out.println("Current time => " + c);
+            Date c = Calendar.getInstance().getTime();
+            System.out.println("Current time => " + c);
 
-                SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-                String formattedDate = df.format(c);
+            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+            String formattedDate = df.format(c);
 
 
-                String out = outFileName +"Movie Box ("+ formattedDate +")" +".db";
-                db.backup(out);
-                Intent intent = new Intent(activity,BackupRestoreActivity.class);
-                activity.startActivity(intent);
-                activity.finish();
-        } else
-        {Toast.makeText(activity, "Unable to create directory. Retry", Toast.LENGTH_SHORT).show();}
+            String out = outFileName + "Movie Box (" + formattedDate + ")" + ".db";
+            db.backup(out);
+            Intent intent = new Intent(activity, BackupRestoreActivity.class);
+            activity.startActivity(intent);
+            activity.finish();
+        } else {
+            Toast.makeText(activity, "Unable to create directory. Retry", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //ask to the user what backup to restore

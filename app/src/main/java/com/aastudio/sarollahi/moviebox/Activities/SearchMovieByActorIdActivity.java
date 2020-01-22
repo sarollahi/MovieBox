@@ -1,15 +1,16 @@
 package com.aastudio.sarollahi.moviebox.Activities;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.aastudio.sarollahi.moviebox.Data.ViewPagerAdapter;
 import com.aastudio.sarollahi.moviebox.Fragments.FragmentActorMovies;
 import com.aastudio.sarollahi.moviebox.Fragments.FragmentActorTvShows;
 import com.aastudio.sarollahi.moviebox.Model.Actor;
 import com.android.sarollahi.moviebox.R;
+import com.google.android.material.tabs.TabLayout;
 
 public class SearchMovieByActorIdActivity extends AppCompatActivity {
 
@@ -33,20 +34,19 @@ public class SearchMovieByActorIdActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(actorname);
 
 
-
         tabLayout = findViewById(R.id.searchtabs);
         viewPager = findViewById(R.id.viewpager);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        adapter.AddFragment(new FragmentActorMovies(),"MOVIES");
-        adapter.AddFragment(new FragmentActorTvShows(),"TV SHOWS");
+        adapter.AddFragment(new FragmentActorMovies(), "MOVIES");
+        adapter.AddFragment(new FragmentActorTvShows(), "TV SHOWS");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         finish();
         return true;
     }

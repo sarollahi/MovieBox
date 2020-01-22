@@ -3,6 +3,7 @@ package com.aastudio.sarollahi.moviebox.Util;
 /**
  * Created by Vishal on 6/20/2017.
  */
+
 import java.security.AccessController;
 import java.security.Provider;
 

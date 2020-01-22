@@ -1,39 +1,23 @@
 <resources>
     <string name="app_name">Movie Box</string>
-    <string name="action_settings">Settings</string>
     <string name="search">Search</string>
-    <string name="search_text">New Search Term</string>
-    <string name="search_hint">E.g: Batman</string>
-    <string name="submit_text">Search</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Movie Box</string>
     <string name="nav_header_subtitle" translatable="false">moviebox@sarollahi.ir</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="backup_restor"><![CDATA[Backup & restore]]></string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="tab_text_1">LIST</string>
-    <string name="tab_text_2">TILES</string>
-    <string name="section_format">Hello World from section: %1$d</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_movie_detail">MovieDetailActivity</string>
-    <string name="title_activity_person">PersonActivity</string>
     <string name="hint_tmdb_sentence" translatable="false">This product uses the TMDb API but is not endorsed or certified by TMDb</string>
     <string name="rate" translatable="false">"Rate positive"</string>
-    <string name="dialog_app_version_prefix" translatable="false">Version: 1.1.6</string>
+    <string name="dialog_app_version_prefix" translatable="false">Version: 1.2.1</string>
     <string name="dialog_developer_information" translatable="false"><span>\nDeveloped and designed by</span>\n\n<span><small>Seyed Ahmad Sarollahi\nmoviebox@sarollahi.ir</small></span></string>
-    <string name="title_activity_my_movies">MyMoviesActivity</string>
 
-    <string name="add_item">Add First Movie</string>
     <string name="enter_movie">Search movie</string>
     <string name="hint_movie">title</string>
     <string name="year_hint">year (optional)</string>
     <string name="search_title">SEARCH</string>
-    <string name="scan_title">SCAN CODE</string>
-    <string name="new_title">NEW</string>
-    <string name="title_activity_best">BestActivity</string>
     <string name="rating">Rating</string>
     <string name="ratingText">--</string>
     <string name="externalLinks">External Links</string>
@@ -54,15 +38,6 @@
     <string name="No_movies_found">No movies found</string>
     <string name="No_tv_shows_found">No TV shows found</string>
     <string name="serach_movies_tv_shows"> movies/TV shows </string>
-    <string name="device_information">DEVICE INFORMATION</string>
-    <string name="please_write_your_message_in_english" translatable="false">\nPlease write your message in English</string>
-    <string name="message">MESSAGE</string>
-    <string name="title_activity_contac">ContacActivity</string>
-    <string name="send">SEND</string>
-    <string name="contact_developer">Contact Developer</string>
-    <string name="cause">CAUSE</string>
-    <string name="no_reviews">No reviews found</string>
-    <string name="No_trailers_found">No trailers found</string>
     <string name="separator">|</string>
     <string name="favorites">Favorites</string>
     <string name="tv_shows">TV Shows</string>
@@ -76,9 +51,6 @@
     <string name="deleted_from_seen_movies">Deleted from seen movies</string>
     <string name="added_to_seen_tvshows">Added to seen TV shows</string>
     <string name="deleted_from_seen_tvshws">Deleted from seen TV shows</string>
-    <string name="delete">Delete</string>
-    <string name="cancel">Cancel</string>
-    <string name="are_you_sure">Are you sure?</string>
     <string name="backups">BACKUPS</string>
     <string name="backup">BACKUP</string>
     <string name="deletedb">DELETE DATABASE</string>
@@ -102,9 +74,4 @@
     <string name="to">To</string>
     <string name="filter">Filter</string>
 
-    <string-array name="cause">
-        <item>Error report</item>
-        <item>Feature request</item>
-        <item>Other</item>
-    </string-array>
 </resources>

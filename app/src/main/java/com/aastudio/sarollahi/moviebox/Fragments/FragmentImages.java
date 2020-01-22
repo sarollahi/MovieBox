@@ -1,20 +1,18 @@
 package com.aastudio.sarollahi.moviebox.Fragments;
 
-import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.ProgressBar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.aastudio.sarollahi.moviebox.Data.PersonImagesRecyclerViewAdapter;
-import com.aastudio.sarollahi.moviebox.Data.PersonRecyclerViewAdapter;
 import com.aastudio.sarollahi.moviebox.Model.Actor;
 import com.aastudio.sarollahi.moviebox.Util.Constants;
 import com.aastudio.sarollahi.moviebox.Util.Utility;
@@ -32,6 +30,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FragmentImages extends Fragment {
 
@@ -41,7 +40,7 @@ public class FragmentImages extends Fragment {
     private PersonImagesRecyclerViewAdapter personRecyclerViewAdapter;
     private List<Actor> actorList;
     private RequestQueue queue;
-    private ProgressBar mProgressBar;
+    private String personId;
 
     public FragmentImages() {
     }
@@ -49,14 +48,13 @@ public class FragmentImages extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.person_image_fragment,container,false);
+        v = inflater.inflate(R.layout.person_image_fragment, container, false);
 
-        int mNoOfColumns = Utility.calculateNoOfColumns(getActivity().getApplicationContext(),85);
-        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
+        int mNoOfColumns = Utility.calculateNoOfColumns(getActivity().getApplicationContext(), 85);
+        recyclerView = v.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), mNoOfColumns));
-        mProgressBar = (ProgressBar) v.findViewById(R.id.progressBaract);
-        personRecyclerViewAdapter = new PersonImagesRecyclerViewAdapter(getActivity(), actorList );
+        personRecyclerViewAdapter = new PersonImagesRecyclerViewAdapter(getActivity(), actorList);
         recyclerView.setAdapter(personRecyclerViewAdapter);
         personRecyclerViewAdapter.notifyDataSetChanged();
         return v;
@@ -66,69 +64,74 @@ public class FragmentImages extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        queue = Volley.newRequestQueue(getActivity());
+        queue = Volley.newRequestQueue(Objects.requireNonNull(getActivity()));
 
         Bundle person = getActivity().getIntent().getExtras();
 
-        String personId = person.getString("personId");
+        assert person != null;
+        personId = person.getString("personId");
 
 
         actorList = new ArrayList<>();
 
-        // getMovies(search);
-        actorList = getActor(personId);
+        getActor getActor = (getActor) new getActor().execute();
 
 
     }
 
-    public List<Actor> getActor(String name) {
-        actorList.clear();
+    class getActor extends AsyncTask<String, Void, List<Actor>> {
 
-        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            actorList.clear();
+        }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET
-                , Constants.PERSON_INFO_URL_LEFT + name + Constants.PERSON_INFO_URL_RIGHT_2, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(final JSONObject response) {
+        @Override
+        protected List<Actor> doInBackground(String... name) {
 
-                try{
-                    JSONObject images = response.getJSONObject("images");
-                    JSONArray imagesArray = images.getJSONArray("profiles");
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET
+                    , Constants.PERSON_INFO_URL_LEFT + personId + Constants.PERSON_INFO_URL_RIGHT_2, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(final JSONObject response) {
 
-                    for (int i = 0; i < imagesArray.length(); i++) {
+                    try {
+                        JSONObject images = response.getJSONObject("images");
+                        JSONArray imagesArray = images.getJSONArray("profiles");
 
-                        JSONObject actorObj = imagesArray.getJSONObject(i);
+                        for (int i = 0; i < imagesArray.length(); i++) {
 
-                        Actor actor = new Actor();
-                        actor.setName(actorObj.getString("height")+"×"+actorObj.getString("width"));
-                        actor.setPoster(actorObj.getString("file_path"));
-                        actor.setActorId("");
+                            JSONObject actorObj = imagesArray.getJSONObject(i);
 
-                        actorList.add(actor);
+                            Actor actor = new Actor();
+                            actor.setName(actorObj.getString("height") + "×" + actorObj.getString("width"));
+                            actor.setPoster(actorObj.getString("file_path"));
+                            actor.setActorId("");
+
+                            actorList.add(actor);
 
 
+                        }
+
+                        personRecyclerViewAdapter.notifyDataSetChanged();
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
 
-                    personRecyclerViewAdapter.notifyDataSetChanged();
 
-
-                }catch (JSONException e) {
-                    e.printStackTrace();
                 }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
+                }
+            });
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            queue.add(jsonObjectRequest);
 
-            }
-        });
-
-        queue.add(jsonObjectRequest);
-
-        return actorList;
-
+            return actorList;
+        }
     }
 }

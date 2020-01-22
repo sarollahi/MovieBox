@@ -1,8 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
 
     <LinearLayout
@@ -10,8 +8,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/cardviewDets"
             android:background="#333333"
             android:layout_width="match_parent"
@@ -56,36 +53,11 @@
                     android:gravity="center"
                     android:textAlignment="center"/>
 
-                <ImageView
-                    android:id="@+id/fav"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="40dp"
-                    android:gravity="center"
-                    android:layout_alignStart="@id/seasonReleased"
-                    android:textAlignment="center"
-                    android:layout_toEndOf="@id/seasonimage"
-                    android:layout_below="@+id/seasonReleased"
-                    android:background="@drawable/baseline_favorite_border_black_24"/>
-
-                <ImageView
-                    android:id="@+id/seen"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_below="@+id/seasonReleased"
-                    android:layout_alignEnd="@id/seasonReleased"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="40dp"
-                    android:layout_marginStart="20dp"
-                    android:background="@drawable/baseline_visibility_off_24"
-                    android:gravity="center"
-                    android:textAlignment="center"/>
-
 
             </RelativeLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -113,7 +85,7 @@
                 android:padding="5dp"
                 android:text="Episodes" />
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/actorcard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -135,9 +107,7 @@
                         android:orientation="vertical"/>
                 </ScrollView>
 
-            </android.support.v7.widget.CardView>
-
-
+            </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
 

@@ -1,15 +1,16 @@
 package com.aastudio.sarollahi.moviebox.Fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.aastudio.sarollahi.moviebox.Data.TvRecyclerViewAdapter;
 import com.aastudio.sarollahi.moviebox.Model.Actor;
@@ -22,23 +23,26 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FragmentActorTvShows extends Fragment {
 
     View v;
-
+    LinearLayoutManager manager;
     private RecyclerView recyclerView;
     private TvRecyclerViewAdapter movieRecyclerViewAdapter;
     private List<TvShow> movieList;
     private RequestQueue queue;
     private Actor actor;
     private String actorId;
-    LinearLayoutManager manager;
 
     public FragmentActorTvShows() {
     }
@@ -46,11 +50,11 @@ public class FragmentActorTvShows extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.tvshows_fragment,container,false);
+        v = inflater.inflate(R.layout.tvshows_fragment, container, false);
 
-        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerViewTvShows);
+        recyclerView = v.findViewById(R.id.recyclerViewTvShows);
         recyclerView.setHasFixedSize(true);
-        movieRecyclerViewAdapter = new TvRecyclerViewAdapter(getContext(), movieList );
+        movieRecyclerViewAdapter = new TvRecyclerViewAdapter(getContext(), movieList);
         manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(movieRecyclerViewAdapter);
@@ -62,64 +66,67 @@ public class FragmentActorTvShows extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        queue = Volley.newRequestQueue(getActivity());
+        queue = Volley.newRequestQueue(Objects.requireNonNull(getActivity()));
 
         actor = (Actor) getActivity().getIntent().getSerializableExtra("actor");
+        assert actor != null;
         actorId = actor.getActorId();
 
         movieList = new ArrayList<>();
 
-        // getMovies(search);
-        movieList = getMovies(actorId);
+        getTvShows getTvShows = (getTvShows) new getTvShows().execute(actorId);
     }
 
-    private List<TvShow> getMovies(String id) {
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                Constants.MAIN_FIND_TV_BY_ACTOR_LEFT + id + Constants.MAIN_FIND_TV_BY_ACTOR_RIGHT,null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
+    class getTvShows extends AsyncTask<String, Void, List<TvShow>> {
+        @Override
+        protected List<TvShow> doInBackground(String... id) {
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                    Constants.MAIN_FIND_TV_BY_ACTOR_LEFT + actorId + Constants.MAIN_FIND_TV_BY_ACTOR_RIGHT, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
 
-                try{
+                    try {
 
-                    JSONArray moviesArray = response.getJSONArray("cast");
+                        JSONArray moviesArray = response.getJSONArray("cast");
 
-                    for (int i = 0; i < moviesArray.length(); i++) {
+                        for (int i = 0; i < moviesArray.length(); i++) {
 
-                        JSONObject movieObj = moviesArray.getJSONObject(i);
+                            JSONObject movieObj = moviesArray.getJSONObject(i);
 
-                        TvShow movie = new TvShow();
-                        movie.setTitle(movieObj.getString("name"));
-                        movie.setYear(movieObj.getString("first_air_date"));
+                            TvShow movie = new TvShow();
+                            movie.setTitle(movieObj.getString("name"));
+                            movie.setYear(movieObj.getString("first_air_date"));
 
-                        movie.setOriginalLanguage(movieObj.getString("original_language"));
-                        movie.setPlot(movieObj.getString("overview"));
-                        movie.setPoster("http://image.tmdb.org/t/p/w185"+movieObj.getString("poster_path"));
-                        movie.setMovieId(movieObj.getString("id"));
+                            movie.setOriginalLanguage(movieObj.getString("original_language"));
+                            movie.setPlot(movieObj.getString("overview"));
+                            movie.setPoster("http://image.tmdb.org/t/p/w185" + movieObj.getString("poster_path"));
+                            movie.setMovieId(movieObj.getString("id"));
 
-                        movieList.add(movie);
+                            movieList.add(movie);
 
 
+                        }
+
+                        movieRecyclerViewAdapter.notifyDataSetChanged();//Important!!
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Snackbar.make(getView(), R.string.No_tv_shows_found, Snackbar.LENGTH_LONG).show();
                     }
 
-                    movieRecyclerViewAdapter.notifyDataSetChanged();//Important!!
 
-                }catch (JSONException e) {
-                    e.printStackTrace();
-                    Snackbar.make(getView(), R.string.No_tv_shows_found,Snackbar.LENGTH_LONG).show();
                 }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
+                }
+            });
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            queue.add(jsonObjectRequest);
 
-            }
-        });
-
-        queue.add(jsonObjectRequest);
-
-        return movieList;
+            return movieList;
+        }
     }
 }

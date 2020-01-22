@@ -6,9 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
+
 import com.aastudio.sarollahi.moviebox.Model.Movie;
 import com.aastudio.sarollahi.moviebox.Model.TvShow;
 import com.android.sarollahi.moviebox.R;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -20,12 +22,10 @@ import java.util.List;
 
 public class DbHelper extends SQLiteOpenHelper {
 
-    //Database Version
-    private static final int DATABASE_VERSION = 1;
-
     //Database Name
     public static final String DATABASE_NAME = "movieBox";
-
+    //Database Version
+    private static final int DATABASE_VERSION = 1;
     //Data Type
     private static final String TEXT = " TEXT ";
     private static final String INTEGER = " INTEGER ";
@@ -103,6 +103,10 @@ public class DbHelper extends SQLiteOpenHelper {
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         mContext = context;
+    }
+
+    public static int getDatabaseVersion() {
+        return DATABASE_VERSION;
     }
 
     @Override
@@ -198,17 +202,15 @@ public class DbHelper extends SQLiteOpenHelper {
         db.insert(TABLE_FAVORITE, null, values);
     }
 
-
-
     //get all movies
     public List<Movie> getAllmovies() {
         SQLiteDatabase db = this.getReadableDatabase();
 
         List<Movie> movieList = new ArrayList<>();
 
-        Cursor cursor = db.query(TABLE_SEEN, new String[] {
+        Cursor cursor = db.query(TABLE_SEEN, new String[]{
                 S_ID, S_MOVIEID, S_DATEADDED,
-                S_ORIGINALLANGUAGE,S_PLOT,S_POSTER,S_TITLE,S_YEAR}, "type=?", new String[] { "m" }, null, null, S_DATEADDED + " DESC");
+                S_ORIGINALLANGUAGE, S_PLOT, S_POSTER, S_TITLE, S_YEAR}, "type=?", new String[]{"m"}, null, null, S_DATEADDED + " DESC");
 
         if (cursor.moveToFirst()) {
             do {
@@ -229,12 +231,11 @@ public class DbHelper extends SQLiteOpenHelper {
 
                 movieList.add(movie);
 
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return movieList;
     }
-
 
     //get all tvshows
     public List<TvShow> getAlltvshows() {
@@ -242,9 +243,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
         List<TvShow> tvShowList = new ArrayList<>();
 
-        Cursor cursor = db.query(TABLE_SEEN, new String[] {
+        Cursor cursor = db.query(TABLE_SEEN, new String[]{
                 S_ID, S_MOVIEID, S_DATEADDED,
-                S_ORIGINALLANGUAGE,S_PLOT,S_POSTER,S_TITLE,S_YEAR}, "type=?", new String[] { "t" }, null, null, S_DATEADDED + " DESC");
+                S_ORIGINALLANGUAGE, S_PLOT, S_POSTER, S_TITLE, S_YEAR}, "type=?", new String[]{"t"}, null, null, S_DATEADDED + " DESC");
 
         if (cursor.moveToFirst()) {
             do {
@@ -265,7 +266,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
                 tvShowList.add(tvShow);
 
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return tvShowList;
@@ -277,9 +278,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
         List<Movie> movieList = new ArrayList<>();
 
-        Cursor cursor = db.query(TABLE_FAVORITE, new String[] {
+        Cursor cursor = db.query(TABLE_FAVORITE, new String[]{
                 S_ID, S_MOVIEID, S_DATEADDED,
-                S_ORIGINALLANGUAGE,S_PLOT,S_POSTER,S_TITLE,S_YEAR}, "type=?", new String[] { "m" }, null, null, S_DATEADDED + " DESC");
+                S_ORIGINALLANGUAGE, S_PLOT, S_POSTER, S_TITLE, S_YEAR}, "type=?", new String[]{"m"}, null, null, S_DATEADDED + " DESC");
 
         if (cursor.moveToFirst()) {
             do {
@@ -300,12 +301,11 @@ public class DbHelper extends SQLiteOpenHelper {
 
                 movieList.add(movie);
 
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return movieList;
     }
-
 
     //get all fav-tvshows
     public List<TvShow> getAllfavtvshows() {
@@ -313,9 +313,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
         List<TvShow> tvShowList = new ArrayList<>();
 
-        Cursor cursor = db.query(TABLE_FAVORITE, new String[] {
+        Cursor cursor = db.query(TABLE_FAVORITE, new String[]{
                 S_ID, S_MOVIEID, S_DATEADDED,
-                S_ORIGINALLANGUAGE,S_PLOT,S_POSTER,S_TITLE,S_YEAR}, "type=?", new String[] { "t" }, null, null, S_DATEADDED + " DESC");
+                S_ORIGINALLANGUAGE, S_PLOT, S_POSTER, S_TITLE, S_YEAR}, "type=?", new String[]{"t"}, null, null, S_DATEADDED + " DESC");
 
         if (cursor.moveToFirst()) {
             do {
@@ -335,12 +335,11 @@ public class DbHelper extends SQLiteOpenHelper {
 
                 tvShowList.add(tvShow);
 
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return tvShowList;
     }
-
 
     //get all movies id
     public ArrayList<String> getmovieId() {
@@ -363,12 +362,12 @@ public class DbHelper extends SQLiteOpenHelper {
     //movie seen or not
     public int getmovie(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursorc = db.rawQuery("SELECT * FROM " + TABLE_SEEN +" WHERE id='"+id+"'", null);
+        Cursor cursorc = db.rawQuery("SELECT * FROM " + TABLE_SEEN + " WHERE id='" + id + "'", null);
 
         int seen;
-        if (cursorc.moveToFirst()){
+        if (cursorc.moveToFirst()) {
             seen = 0;
-        }else {
+        } else {
             seen = 1;
         }
 
@@ -378,12 +377,12 @@ public class DbHelper extends SQLiteOpenHelper {
     //movie fav or not
     public int getfav(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursorc = db.rawQuery("SELECT * FROM " + TABLE_FAVORITE +" WHERE id='"+id+"'", null);
+        Cursor cursorc = db.rawQuery("SELECT * FROM " + TABLE_FAVORITE + " WHERE id='" + id + "'", null);
 
         int fav;
-        if (cursorc.moveToFirst()){
+        if (cursorc.moveToFirst()) {
             fav = 0;
-        }else {
+        } else {
             fav = 1;
         }
 
@@ -402,10 +401,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
         db.delete(TABLE_FAVORITE, F_ID + " = ? ", new String[]{String.valueOf(id)});
-    }
-
-    public static int getDatabaseVersion() {
-        return DATABASE_VERSION;
     }
 
     //close database

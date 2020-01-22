@@ -5,17 +5,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.aastudio.sarollahi.moviebox.Data.DbHelper;
 import com.aastudio.sarollahi.moviebox.Util.LocalBackup;
@@ -41,6 +42,7 @@ public class BackupRestoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backup_restore);
         activity = this;
+
 
         Permissions.verifyStoragePermissions(activity);
         assert getSupportActionBar() != null;   //null check
@@ -108,7 +110,7 @@ public class BackupRestoreActivity extends AppCompatActivity {
                                     boolean deleted = dfile.delete();
                                     arrayAdapter.remove(arrayAdapter.getItem(position));
                                     arrayAdapter.notifyDataSetChanged();
-                                    Intent intent = new Intent(BackupRestoreActivity.this,BackupRestoreActivity.class);
+                                    Intent intent = new Intent(BackupRestoreActivity.this, BackupRestoreActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -127,20 +129,18 @@ public class BackupRestoreActivity extends AppCompatActivity {
 
                 }
 
-            }else {
+            } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_PERMISSIONS);
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_PERMISSIONS);
             }
         }
 
 
-
-
     }
 
 
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         finish();
         return true;
     }

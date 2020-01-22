@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="imgAppIcon" type="id"/>
-    <item name="txtAppName" type="id"/>
-    <item name="txtAppVersion" type="id"/>
-    <item name="txtDevelopInfos" type="id"/>
-    <item name="appBuyInfoStatusWrapper" type="id"/>
-    <item name="txtAppVersionBuyStatus" type="id"/>
-    <item name="imgPlayStore" type="id"/>
-    <item name="txtInfoRate" type="id"/>
-    <item name="txtTmdbHint" type="id"/>
+    <item name="imgAppIcon" type="id" />
+    <item name="txtAppName" type="id" />
+    <item name="txtAppVersion" type="id" />
+    <item name="txtDevelopInfos" type="id" />
+    <item name="appBuyInfoStatusWrapper" type="id" />
+    <item name="txtAppVersionBuyStatus" type="id" />
+    <item name="imgPlayStore" type="id" />
+    <item name="txtInfoRate" type="id" />
+    <item name="txtTmdbHint" type="id" />
     <item name="txtDevelopInfo" type="id" />
-    <item name="spGenre" type="id" />
 </resources>

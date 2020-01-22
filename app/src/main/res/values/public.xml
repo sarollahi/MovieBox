@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <public type="attr" name="dividerDrawable" id="0x7f010003" />
-    <public type="attr" name="dividerHeight" id="0x7f010004" />
-    <public type="id" name="txtAppName" id="0x7f0f012a" />
-    <public type="id" name="txtAppVersion" id="0x7f0f012b" />
-    <public type="id" name="txtDevelopInfos" id="0x7f0f012c" />
-    <public type="id" name="appBuyInfoStatusWrapper" id="0x7f0f012d" />
-    <public type="id" name="txtAppVersionBuyStatus" id="0x7f0f012e" />
-    <public type="id" name="txtInfoRate" id="0x7f0f012f" />
-    <public type="id" name="imgPlayStore" id="0x7f0f0130" />
-    <public type="id" name="txtTmdbHint" id="0x7f0f0131" />
+    <public name="dividerDrawable" id="0x7f010003" type="attr" />
+    <public name="dividerHeight" id="0x7f010004" type="attr" />
+    <public name="txtAppName" id="0x7f0f012a" type="id" />
+    <public name="txtAppVersion" id="0x7f0f012b" type="id" />
+    <public name="txtDevelopInfos" id="0x7f0f012c" type="id" />
+    <public name="appBuyInfoStatusWrapper" id="0x7f0f012d" type="id" />
+    <public name="txtAppVersionBuyStatus" id="0x7f0f012e" type="id" />
+    <public name="txtInfoRate" id="0x7f0f012f" type="id" />
+    <public name="imgPlayStore" id="0x7f0f0130" type="id" />
+    <public name="txtTmdbHint" id="0x7f0f0131" type="id" />
 </resources>

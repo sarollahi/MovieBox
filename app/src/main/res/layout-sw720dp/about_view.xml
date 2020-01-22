@@ -38,26 +38,11 @@
                 <TextView
                     android:id="@id/txtAppVersion"
                     style="@style/TextInfoDefault"
-                    android:text="@string/dialog_app_version_prefix"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="@string/dialog_app_version_prefix" />
             </LinearLayout>
         </LinearLayout>
-
-        <TextView
-            android:id="@id/txtDevelopInfo"
-            style="@style/TextInfoDefault"
-            android:text="@string/dialog_developer_information"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="?dividerHeight"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:background="?dividerDrawable" />
 
         <LinearLayout
             android:id="@id/appBuyInfoStatusWrapper"
@@ -65,15 +50,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="horizontal">
-
-            <TextView
-                android:id="@id/txtAppVersionBuyStatus"
-                style="@style/TextInfoDefault"
-                android:layout_width="0.0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:layout="@id/txtInfoRate"
-                android:paddingRight="0.0dip" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -95,14 +71,24 @@
                     android:layout_height="wrap_content"
                     android:text="@string/rate" />
             </LinearLayout>
+
+            <TextView
+                android:id="@id/txtAppVersionBuyStatus"
+                style="@style/TextInfoDefault"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout="@id/txtInfoRate"
+                android:paddingRight="0.0dip" />
         </LinearLayout>
 
-        <View
+        <TextView
+            android:id="@id/txtDevelopInfo"
+            style="@style/TextInfoDefault"
             android:layout_width="match_parent"
-            android:layout_height="?dividerHeight"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:background="?dividerDrawable" />
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/dialog_developer_information" />
 
         <TextView
             android:id="@id/txtTmdbHint"
@@ -111,5 +97,19 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/hint_tmdb_sentence" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="?dividerHeight"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:background="?dividerDrawable" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="?dividerHeight"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:background="?dividerDrawable" />
     </LinearLayout>
 </ScrollView>

@@ -1,8 +1,9 @@
 package com.aastudio.sarollahi.moviebox.Activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.sarollahi.moviebox.R;
 import com.squareup.picasso.Picasso;
@@ -24,7 +25,7 @@ public class BigImageActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.bigsize);
 
-        if (image != null || image != ""){
+        if (image != null || image != "") {
             Picasso.get()
                     .load("https://image.tmdb.org/t/p/original" + image)
                     .into(imageView);
@@ -32,7 +33,7 @@ public class BigImageActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         finish();
         return true;
     }

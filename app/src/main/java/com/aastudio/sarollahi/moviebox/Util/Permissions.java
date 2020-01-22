@@ -3,7 +3,8 @@ package com.aastudio.sarollahi.moviebox.Util;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
+
+import androidx.core.app.ActivityCompat;
 
 import static com.aastudio.sarollahi.moviebox.Activities.BackupRestoreActivity.REQUEST_CODE_PERMISSIONS;
 
